@@ -58,3 +58,9 @@
             }
         }           
     });
+
+	// Button navigation - Explore
+	$(".explore").on("click", function(e){
+    e.preventDefault();
+    $(".menu .resume").trigger("click"); 
+	});

@@ -11,7 +11,7 @@
 
 // 15. map js (main js file custom code)
 // ---------------------------------------------------------------------------
-    var map = L.map('mapwrapper').setView([-37.817160, 144.955937], 12);
+    var map = L.map('mapwrapper').setView([3.0549, 101.6905], 15);
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -26,4 +26,4 @@
         // shadowSize: [72, 72],
     });
 
-    L.marker([-37.817160, 144.955937], {icon: greenIcon}).addTo(map);
+    L.marker([3.0549, 101.6905], {icon: greenIcon}).addTo(map);
