@@ -20,8 +20,7 @@
 
     var greenIcon = L.icon({
         iconUrl: "images/logo/map-icon.png",
-
-        iconSize:     [60, 55], // size of the icon
+        iconSize: [60, 55], // size of the icon
         // shadowUrl: 'my-icon-shadow.png',
         // shadowSize: [72, 72],
     });
