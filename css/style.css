@@ -1141,6 +1141,16 @@ span.social-text{
 .contact-form-wrapper textarea{
 	min-height: 180px;
 }
+.contact-form-wrapper .form-message {
+	margin-top: 18px;
+	font-weight: 600;
+}
+.contact-form-wrapper .form-message.success {
+	color: #198754;
+}
+.contact-form-wrapper .form-message.error {
+	color: #dc3545;
+}
 .contact-form-wrapper h2,.reply-form{
 	font-size: 36px;
 }

@@ -220,7 +220,8 @@
 		var form = $('#contact-form');
 
 		// Getting the messages div
-		var formMessages = $('.form-message');
+		var formMessages = $('.contact-form-wrapper .form-message');
+		var submitButton = $(form).find('button[type="submit"]');
 
 
 		// Setting up an event listener for the contact form
@@ -230,12 +231,18 @@
 		
 		// Serializing the form data
 		var formData = $(form).serialize();
+		$(formMessages).removeClass('success error').text('Sending your message...');
+		$(submitButton).prop('disabled', true).text('Sending...');
 
 		// Submitting the form using AJAX
 		$.ajax({
 			type: 'POST',
 			url: $(form).attr('action'),
-			data: formData
+			data: formData,
+			dataType: 'json',
+			headers: {
+				'Accept': 'application/json'
+			}
 		}).done(function(response) {
 		
 			// Making the formMessages div to have the 'success' class
@@ -243,13 +250,10 @@
 			$(formMessages).addClass('success');
 
 			// Setting the message text
-			$(formMessages).text(response);
+			$(formMessages).text('Thanks! Your message has been sent successfully.');
 
-			// Clearing the form after successful submission 
-			$('#inputName').val('');
-			$('#inputEmail').val('');
-			$('#inputPhone').val('');
-			$('#inputMessage').val('');
+			// Clearing the form after successful submission
+			form[0].reset();
 		}).fail(function(data) {
 		
 			// Making the formMessages div to have the 'error' class
@@ -257,11 +261,16 @@
 			$(formMessages).addClass('error');
 
 			// Setting the message text
-			if (data.responseText !== '') {
-				$(formMessages).text(data.responseText);
+			if (data.responseJSON && data.responseJSON.errors) {
+				var errorMessage = data.responseJSON.errors.map(function(error) {
+					return error.message;
+				}).join(' ');
+				$(formMessages).text(errorMessage);
 			} else {
-				$(formMessages).text('Oops! An error occurred and your message could not be sent.');
+				$(formMessages).text('Sorry, your message could not be sent. Please try again.');
 			}
+		}).always(function() {
+			$(submitButton).prop('disabled', false).text('Send Message');
 		});
 
 		});
