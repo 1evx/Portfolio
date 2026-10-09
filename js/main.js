@@ -51,7 +51,10 @@
 	$(window).on('load', function () {
 		var projectSlug = window.location.hash.replace(/^#portfolio\/?/, '');
 		var projectModals = {
-			'apu-automotive-service-centre': '#exampleModal-p12'
+			'apu-automotive-service-centre': '#exampleModal-p12',
+			'facenet-ai': '#exampleModal-p1',
+			'fai-donut': '#exampleModal-p13',
+			'intent-router-engine': '#exampleModal-p11'
 		};
 		var modalSelector = projectModals[projectSlug];
 
@@ -69,6 +72,36 @@
 		})
 		.on('hidden.bs.modal', function () {
 			if (window.location.hash === '#portfolio/apu-automotive-service-centre') {
+				window.history.replaceState({}, '', '#portfolio');
+			}
+		});
+
+	$('#exampleModal-p1')
+		.on('shown.bs.modal', function () {
+			window.history.replaceState({}, '', '#portfolio/facenet-ai');
+		})
+		.on('hidden.bs.modal', function () {
+			if (window.location.hash === '#portfolio/facenet-ai') {
+				window.history.replaceState({}, '', '#portfolio');
+			}
+		});
+
+	$('#exampleModal-p13')
+		.on('shown.bs.modal', function () {
+			window.history.replaceState({}, '', '#portfolio/fai-donut');
+		})
+		.on('hidden.bs.modal', function () {
+			if (window.location.hash === '#portfolio/fai-donut') {
+				window.history.replaceState({}, '', '#portfolio');
+			}
+		});
+
+	$('#exampleModal-p11')
+		.on('shown.bs.modal', function () {
+			window.history.replaceState({}, '', '#portfolio/intent-router-engine');
+		})
+		.on('hidden.bs.modal', function () {
+			if (window.location.hash === '#portfolio/intent-router-engine') {
 				window.history.replaceState({}, '', '#portfolio');
 			}
 		});
