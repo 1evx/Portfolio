@@ -45,6 +45,35 @@
 		scrollTop: 0,
 		}, 600);
 	});
+
+	// Open a portfolio project directly from a shareable URL.
+	// Example: ?project=apu-automotive-service-centre
+	$(window).on('load', function () {
+		var projectSlug = new URLSearchParams(window.location.search).get('project');
+		var projectModals = {
+			'apu-automotive-service-centre': '#exampleModal-p12'
+		};
+		var modalSelector = projectModals[projectSlug];
+
+		if (modalSelector && $(modalSelector).length) {
+			$('.menu .portfolio').trigger('click');
+			window.setTimeout(function () {
+				$(modalSelector).modal('show');
+			}, 650);
+		}
+	});
+
+	$('#exampleModal-p12')
+		.on('shown.bs.modal', function () {
+			var url = new URL(window.location.href);
+			url.searchParams.set('project', 'apu-automotive-service-centre');
+			window.history.replaceState({}, '', url.toString());
+		})
+		.on('hidden.bs.modal', function () {
+			var url = new URL(window.location.href);
+			url.searchParams.delete('project');
+			window.history.replaceState({}, '', url.toString());
+		});
 	
 
 
