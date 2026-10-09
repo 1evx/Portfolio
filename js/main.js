@@ -46,10 +46,10 @@
 		}, 600);
 	});
 
-	// Open a portfolio project directly from a shareable URL.
-	// Example: ?project=apu-automotive-service-centre
+	// Open a portfolio project directly from a shareable, client-side URL.
+	// Example: #portfolio/apu-automotive-service-centre
 	$(window).on('load', function () {
-		var projectSlug = new URLSearchParams(window.location.search).get('project');
+		var projectSlug = window.location.hash.replace(/^#portfolio\/?/, '');
 		var projectModals = {
 			'apu-automotive-service-centre': '#exampleModal-p12'
 		};
@@ -65,14 +65,12 @@
 
 	$('#exampleModal-p12')
 		.on('shown.bs.modal', function () {
-			var url = new URL(window.location.href);
-			url.searchParams.set('project', 'apu-automotive-service-centre');
-			window.history.replaceState({}, '', url.toString());
+			window.history.replaceState({}, '', '#portfolio/apu-automotive-service-centre');
 		})
 		.on('hidden.bs.modal', function () {
-			var url = new URL(window.location.href);
-			url.searchParams.delete('project');
-			window.history.replaceState({}, '', url.toString());
+			if (window.location.hash === '#portfolio/apu-automotive-service-centre') {
+				window.history.replaceState({}, '', '#portfolio');
+			}
 		});
 	
 
